@@ -1,0 +1,108 @@
+history
+ls
+cat ./out/dnf.out 
+ls /dev/
+parted -s /dev/sdb mklabel gpt
+parted -s /deb/sdb mkpart primary et4 1MiB 100%
+parted -s /deb/sdb mkpart primary ext4 1MiB 100%
+ls /dev/
+parted -s /dev/sdb mklabel gpt
+lsblk
+parted -s /dev/sdb mklabel gpt
+parted -s /deb/sdb mkpart primary ext4 1MiB 100%
+parted -s /dev/sdb mkpart primary ext4 1MiB 100%
+mkfs.ext4 -L MEPHI_WEB /dev/sdb1
+mkdir -p /mephi-web
+echo 'LABEL=MEPHI_WEB /mephi-web ext4 defaults 0 2' | tee -a /etc/fstab
+mount -a
+systemctl daemon-reload
+mount -a
+df -h
+systemctl start nginx
+systemctl enable nginx.service 
+systemctl enable nginx
+journalctl -u nginx -b > ./out/journalctl.out
+groupadd dev
+useradd -u 5501 -G dev user1
+useradd -u 5502 -G dev user2
+useradd -u 5503 -G dev user3
+groupadd -g 4444 curators
+useradd -G curators curator1
+useradd -G curators curator2
+mkdir -p /data/mephi-2026
+chown root:devteam /data/mephi-2026
+chown devteam /data/mephi-2026
+chown root:dev /data/mephi-2026
+chmod 2770 /data/mephi-2026
+setfacl -m g:curators:r-x /data/mephi-2026
+setfacl -d -m g::rwx /data/mephi-2026
+setfacl -d -m g:dev:rwx /data/mephi-2026
+setfacl -d -m g:curators:r-x /data/mephi-2026
+setfacl -d -m o::--- /data/mephi-2026
+chmod u-s /usr/sbin/tcpdump 
+setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump 
+sudo -u user1 tcpdump -i lo -c 1
+setenforce 1
+getenforce > ./out/getenforce.out
+restorecon -Rv /mephi-web
+semanage fcontext -a -t httpd_sys_content_t "/mephi-web(/.?)?"
+setmanage fcontext -a -t httpd_sys_content_t "/mephi-web(/.?)?"
+dnf install -y policycoreutils-python-utils
+semanage fcontext -a -t httpd_sys_content_t "/mephi-web(/.?)?"
+restorecon -Rv /mephi-web
+usermod -s /sbin/nologin curator1
+usermod -s /sbin/nologin curator2
+echo "minlen = 12" | tee -a /etc/security/pwquality.conf
+for user in user1 user2 user3 curator1 curator2; do chage -M 90 $user; done
+echo "Hello from student: 44054" | sudo tee /mephi-web/index.html
+restorecon -v /mephi-web/index.html 
+curl http://localhost/
+sed -i "s|/usr/share/nginx/html|/mephi-web|g" /etc/nginx/nginx.conf
+curl http://localhost/
+sed -i "s|/usr/share/nginx/html|/mephi-web|g" /etc/nginx/nginx.conf
+curl http://localhost/
+sed -i "s|/usr/share/nginx/html|/mephi-web|g" /etc/nginx/nginx.conf
+curl http://localhost/
+nginx -t
+systemctl reload nginx
+curl http://localhost/
+restorecon -Rv /mephi-web
+curl http://localhost/
+ls -l /mephi-web/
+semanage fcontext -a -t httpd_sys_content_t "/mephi-web(/.?)?"
+ls -l /mephi-web/
+curl http://localhost/
+curl http://localhost/index.html
+ls -ldZ /mephi-web
+ls -lZ /mephi-web
+ls -lZ /mephi-web/index.html 
+systemctl reload nginx
+curl http://localhost/index.html
+tail -n 10 /var/log/nginx/error.log 
+chmod 755 /mephi-web/
+chmod 755 /mephi-web
+curl http://localhost/index.html
+chown root:root /mephi-web/index.html 
+curl http://localhost/index.html
+tail -n 10 /var/log/nginx/error.log 
+systemctl reload nginx
+tail -n 10 /var/log/nginx/error.log 
+curl http://localhost/index.html
+chmod 644 /mephi-web/index.html 
+curl http://localhost/index.html
+tail -n 10 /var/log/nginx/error.log 
+grep -i "root" /etc/nginx/nginx.conf
+curl http://localhost/index.html
+systemctl reload nginx
+curl http://localhost/index.html
+grep -i "root" /etc/nginx/nginx.conf
+tail -n 10 /var/log/nginx/error.log 
+ls -ldZ /mephi-web
+ls -lZ /mephi-web/index.html 
+restorecon -v /mephi-web/index.html 
+semanage fcontext -a -t httpd_sys_content_t /mephi-web/index.html 
+restorecon -v /mephi-web/index.html 
+curl http://localhost/index.html
+cd out/
+ls
+history -w ./history.out
